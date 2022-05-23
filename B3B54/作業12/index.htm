@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>作業12</title>
+	<style>
+            h4{
+        color: red;
+        }
+
+        div{
+        color: blue;
+        margin: 5px;
+        }
+         label {
+                 color: blue;
+        }
+
+        input {
+               color: brown;
+        }
+        div {
+               color: blue;
+               margin: 5px;
+        }
+        td:nth-child(1){
+            color: brown;
+        }
+        table{
+                 border-collapse:collapse;
+                 width:90%;
+                 border-color: blue;
+　　　　　　　　　　 border-style:solid;
+              }
+    </style>
+</head>
+<body>
+<form id="form01">
+	姓名: <input type="text" name="name01" value="左其勳"><br>
+	收件住址: <input type="text" name="address01" value="新北市中和區中正路819號15樓-2"><br>
+	電話: <input type="tel" name="tel01" value="0971231891"><br>
+	電子郵件: <input type="email" name="email01" value="chison17@gmail.com"><br>
+	指定送貨日期: <input type="date" name="date01"><br>
+	遊戲代購: <br><input type="checkbox" name="game" id="game01" value="SL 1 Disc-ULTEGRA Di2(1輛)">SL 1 Disc-ULTEGRA Di2(1輛) 130,000元;
+	購買數量: <input type="number" name="number01"><br>
+	<input type="checkbox" name="" id="game02" value="SL 0 Disc(1輛)">SL 0 Disc(1輛) 308,000元
+	購買數量: <input type="number" name="number02"><br>
+	<input type="checkbox" name="game" id="game03" value="SL 1 Disc-KOM(1輛)">SL 1 Disc-KOM(1輛) 218,000元
+	購買數量: <input type="number" name="number03"><br>
+	<input type="checkbox" name="game" id="game04" value="Propel Advanced SL 1(1輛)">Propel Advanced SL 1(1輛) 238,000元
+	購買數量: <input type="number" name="number04"><br>
+
+</form>
+<br>
+<button onclick="shoppingInfo()"><h4> 結帳 </h4></button>
+<div id="demo"></div>
+<script>
+    var text = "<h4>您的購物資訊如下:</h4>";
+    var game = function (gameType, gamePrice, no){
+        this.Type = gameType;
+        this.Price =gamePrice;
+        this.subTotal = function(no){
+             text += "公路車型號: (四選一) " + this.Type + "; 共" + no + "單位<br>";
+             text += "價格小計: " + this.Price * no + "元<br>";
+        };
+    };
+    var game01 = new game("SL 1 Disc-ULTEGRA Di2(1輛) ", 130,000, 0);
+    var game02 = new game("SL 0 Disc(1輛)",  308,000,0);
+    var game03 = new game("SL 1 Disc-KOM(1輛)", 218,000, 0);
+    var game04 = new game("Propel Advanced SL 1(1輛)", 238,000,0);
+        function shoppingInfo() {
+            var x = document.getElementById("form01");
+            var item = " ";
+            var sumToPay = 0;
+            var i;
+             text += "<table border='1' width='90%' cell spacing='0' cell padding='0'>";
+
+            for(i = 0; i < 5; i++){
+
+                switch(i) {
+                   case 0: item ="姓名: "; break;
+                   case 1: item ="收件地址: "; break;
+                   case 2: item ="電話: "; break;
+                   case 3: item ="電子郵件: "; break;
+                   case 4: item ="指定送貨日期: "; break;
+                }
+
+            }
+
+            for ( i=5; i<=11; i++) {
+             text += "<tr>";
+                if(x.elements[i].checked === true) {
+                   switch(i){
+                      case 5: game01.no = x.elements[i+1].value;
+                              sumToPay += game01.Price * game01.no;
+                              game01.subTotal(game01.no);
+                              break;
+                      case 7: game02.no = x.elements[i+1].value;
+                              sumToPay += game02.Price * game02.no;
+                              game02.subTotal(game02.no);
+                              break;
+                      case 9: game03.no = x.elements[i+1].value;
+                              sumToPay += game03.Price * game03.no;
+                              game03.subTotal(game03.no);
+                              break;
+                      case 11:game04.no = x.elements[i+1].value;
+                              sumToPay += game04.Price * game04.no;
+                              game04.subTotal(game04.no);
+                              break;
+                      }
+
+                }
+
+        }
+        text += "價格合計: " + sumToPay + "元<br>";
+        document.getElementById("demo").innerHTML = text;
+        }
+</script>
+</body>
+</html>
+
+
+
+
+</script>
+</body>
+</html>
